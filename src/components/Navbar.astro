@@ -1,0 +1,105 @@
+<header
+  class="sticky top-0 z-50 border-b border-white/10 bg-zinc-950/90 backdrop-blur-lg"
+>
+  <nav
+    class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+  >
+    <!-- Logo -->
+    <a href="/" class="flex items-center gap-3">
+      <div
+        class="flex h-10 w-10 items-center justify-center rounded-full bg-orange-500 font-black text-black"
+      >
+        Z
+      </div>
+      <div>
+        <h1 class="text-xl font-black tracking-tight">
+          Dragon<span class="text-orange-500">Verse</span>
+        </h1>
+        <p class="hidden text-xs text-zinc-500 sm:block">
+          Dragon Ball Database
+        </p>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden items-center gap-8 md:flex">
+      <a
+        href="/"
+        class="text-sm font-medium text-zinc-300 transition hover:text-orange-400"
+      >
+        Inicio
+      </a>
+      <a
+        href="/characters"
+        class="text-sm font-medium text-zinc-300 transition hover:text-orange-400"
+      >
+        Personajes
+      </a>
+      <a
+        href="/planets"
+        class="text-sm font-medium text-zinc-300 transition hover:text-orange-400"
+      >
+        Planetas
+      </a>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <button
+      id="menu-button"
+      class="rounded-lg border-white/10 p-2 text-zinc-300 transition hover:bg-white/10 md:hidden"
+      aria-label="Abrir menu"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2"
+        ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+          d="M4 6l16 0"></path><path d="M4 12l16 0"></path><path d="M4 18l16 0"
+        ></path></svg
+      >
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-white/10 bg-zinc-950 px-4 py-4 md:hidden"
+  >
+    <div class="flex flex-col gap-4">
+      <a
+        href="/"
+        class="text-sm font-medium text-zinc-300hover:text-orange-400"
+      >
+        Inicio
+      </a>
+      <a
+        href="/characters"
+        class="text-sm font-medium text-zinc-300hover:text-orange-400"
+      >
+        Personajes
+      </a>
+      <a
+        href="/planets"
+        class="text-sm font-medium text-zinc-300hover:text-orange-400"
+      >
+        Planetas
+      </a>
+    </div>
+  </div>
+</header>
+
+<script>
+  const button = document.getElementById("menu-button");
+  const menu = document.getElementById("mobile-menu");
+
+  button?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+</script>

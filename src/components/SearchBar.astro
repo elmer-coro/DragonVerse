@@ -1,0 +1,92 @@
+---
+interface Props {
+  name?: string;
+  action?: string;
+  label?: string;
+  placeholder?: string;
+}
+
+const {
+  name = "",
+  action = "/characters",
+  label = "Buscar personaje",
+  placeholder = "Escribe el nombre del personaje...",
+} = Astro.props;
+---
+
+<form
+  method="GET"
+  action={action}
+  class="rounded-2xl border border-white/10 bg-white/[0.03] p-5"
+>
+  <label
+    for="name"
+    class="mb-3 block text-xs font-bold uppercase tracking-wider text-zinc-500"
+  >
+    {label}
+  </label>
+
+  <div class="flex flex-col gap-3 sm:flex-row">
+    <div class="relative flex-1">
+      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+          <path d="M3 10a7 7 0 1 0 14 0a7 7 0 0 0 -14 0"></path>
+          <path d="M21 21l-6 -6"></path>
+        </svg>
+      </span>
+
+      <input
+        id="name"
+        name="name"
+        type="text"
+        value={name}
+        placeholder={placeholder}
+        autocomplete="off"
+        class="w-full rounded-xl border border-white/10 bg-zinc-950 py-3 pl-11 pr-4 text-white outline-none transition placeholder:text-zinc-600 focus:border-orange-500 focus:ring-1 focus:ring-orange-500"
+      />
+    </div>
+
+    <button
+      type="submit"
+      class="cursor-pointer rounded-xl bg-orange-500 px-6 py-3 font-bold text-black transition hover:bg-orange-400"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+        <path d="M3 10a7 7 0 1 0 14 0a7 7 0 0 0 -14 0"></path>
+        <path d="M21 21l-6 -6"></path>
+      </svg>
+    </button>
+
+    {
+      name && (
+        <a
+          href={action}
+          class="rounded-xl border border-white/10 px-6 py-3 text-center font-bold text-zinc-300 transition hover:bg-white/10 hover:text-white"
+        >
+          Limpiar
+        </a>
+      )
+    }
+  </div>
+</form>

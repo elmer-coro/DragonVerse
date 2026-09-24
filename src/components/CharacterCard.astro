@@ -1,0 +1,81 @@
+---
+interface Character {
+  id: number;
+  name: string;
+  ki: string;
+  maxKi: string;
+  race: string;
+  gender: string;
+  description: string;
+  image: string;
+  affiliation: string;
+  deletedAt: string | null;
+}
+
+interface Props {
+  character: Character;
+}
+
+const { character } = Astro.props;
+---
+
+<article
+  class="group overflow-hidden rounded-2xl border border-white/10 bg-zinc-900 transition duration-300 hover:-translate-y-2 hover:border-orange-500/50 hover:shadow-2xl hover:shadow-orange-500/10"
+>
+  <!-- Imagen -->
+  <div class="relative h-80 overflow-hidden bg-zinc-950">
+    <img
+      src={character.image}
+      alt={character.name}
+      loading="lazy"
+      class="h-full w-full object-contain transition duration-500 group-hover:scale-110"
+    />
+
+    <!-- ID -->
+    <span
+      class="absolute left-3 top-3 rounded-full bg-black/70 px-3 py-1 text-xs font-bold text-zinc-300 backdrop-blur"
+    >
+      #{character.id}
+    </span>
+  </div>
+
+  <!-- Información -->
+  <div class="p-5">
+    <h2 class="text-2xl font-black text-white">
+      {character.name}
+    </h2>
+
+    <div class="mt-4 space-y-2 text-sm">
+      <div class="flex justify-between">
+        <span class="text-zinc-500"> Raza </span>
+
+        <span class="font-medium text-zinc-200">
+          {character.race}
+        </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-zinc-500"> Género </span>
+
+        <span class="font-medium text-zinc-200">
+          {character.gender}
+        </span>
+      </div>
+
+      <div class="flex justify-between">
+        <span class="text-zinc-500"> Ki </span>
+
+        <span class="font-medium text-orange-400">
+          {character.ki}
+        </span>
+      </div>
+    </div>
+
+    <a
+      href={`/characters/${character.id}`}
+      class="mt-6 block rounded-xl border border-white/10 py-3 text-center text-sm font-bold text-white transition hover:bg-orange-500 hover:text-black"
+    >
+      Ver personaje
+    </a>
+  </div>
+</article>

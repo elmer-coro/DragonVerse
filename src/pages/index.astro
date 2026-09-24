@@ -1,0 +1,271 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import CharacterCard from "../components/CharacterCard.astro";
+import { getCharacters, getPlanets } from "../services/dragonball";
+
+const charactersData = await getCharacters(1, 4);
+const planetsData = await getPlanets(1, 4);
+
+const totalCharacters = charactersData.meta.totalItems;
+const totalPlanets = planetsData.meta.totalItems;
+
+const featuredCharacters = charactersData.items;
+---
+
+<Layout title="DragonDex | Inicio">
+  <Navbar />
+  <main>
+    <!-- HERO -->
+    <section class="relative overflow-hidden">
+      <!-- Efectos de fondo -->
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(249,115,22,0.18),transparent_40%)]"
+      >
+      </div>
+      <div
+        class="absolute -right-40 top-20 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl"
+      >
+      </div>
+      <div
+        class="absolute -left-40 bottom-0 h-96 w-96 rounded-full bg-orange-500/5 blur-3xl"
+      >
+      </div>
+      <div
+        class="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-28"
+      >
+        <div class="max-w-4xl">
+          <span
+            class="mb-6 inline-flex rounded-full border border-orange-500/30 bg-orange-500/10 px-4 py-2 text-sm font-medium text-orange-400"
+          >
+            🐉 Dragon Ball Database
+          </span>
+          <h1
+            class="text-5xl font-black tracking-tight sm:text-6xl lg:text-8xl"
+          >
+            Explora el <span class="text-orange-500"> universo </span> Dragon Ball.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
+            Descubre personajes, transformaciones y planetas utilizando
+            información obtenida directamente de la API de Dragon Ball.
+          </p>
+          <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+            <a
+              href="/characters"
+              class="rounded-xl bg-orange-500 px-6 py-3 text-center font-bold text-black transition hover:bg-orange-400"
+            >
+              Explorar personajes
+            </a>
+            <a
+              href="/planets"
+              class="rounded-xl border border-white/10 px-6 py-3 text-center font-bold text-white transition hover:bg-white/10"
+            >
+              Explorar planetas
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ESTADÍSTICAS -->
+    <section class="border-y border-white/10 bg-white/[0.02] max-w-7xl mx-auto">
+      <div
+        class="mx-auto grid max-w-7xl grid-cols-1 gap-px bg-white/10 sm:grid-cols-3"
+      >
+        <!-- PERSONAJES -->
+        <div class="bg-zinc-950 p-8 text-center">
+          <div
+            class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 text-2xl"
+          >
+            👤
+          </div>
+          <p class="mt-5 text-4xl font-black text-orange-500">
+            {totalCharacters}
+          </p>
+          <p class="mt-2 text-sm font-medium text-zinc-500">
+            Personajes registrados
+          </p>
+        </div>
+        <!-- PLANETAS -->
+        <div class="bg-zinc-950 p-8 text-center">
+          <div
+            class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 text-2xl"
+          >
+            🌎
+          </div>
+          <p class="mt-5 text-4xl font-black text-orange-500">{totalPlanets}</p>
+          <p class="mt-2 text-sm font-medium text-zinc-500">
+            Planetas registrados
+          </p>
+        </div>
+        <!-- TRANSFORMACIONES -->
+        <div class="bg-zinc-950 p-8 text-center">
+          <div
+            class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 text-2xl"
+          >
+            ⚡
+          </div>
+          <p class="mt-5 text-4xl font-black text-orange-500">43</p>
+          <p class="mt-2 text-sm font-medium text-zinc-500">
+            Transformaciones registradas
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- PERSONAJES DESTACADOS -->
+    <section>
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div
+          class="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"
+        >
+          <div>
+            <span
+              class="text-sm font-bold uppercase tracking-widest text-orange-500"
+            >
+              Base de datos
+            </span>
+            <h2 class="mt-2 text-3xl font-black sm:text-4xl">
+              Personajes destacados
+            </h2>
+            <p class="mt-3 max-w-2xl text-zinc-400">
+              Explora algunos de los personajes disponibles en DragonVerse.
+            </p>
+          </div>
+          <a
+            href="/characters"
+            class="text-sm font-bold text-orange-400 transition hover:text-orange-300 flex items-center gap-1"
+          >
+            Ver todos <span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"
+                ><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path
+                  d="M5 12l14 0"></path><path d="M15 16l4 -4"></path><path
+                  d="M15 8l4 4"></path></svg
+              >
+            </span>
+          </a>
+        </div>
+        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {
+            featuredCharacters.map((character) => (
+              <CharacterCard character={character} />
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <!-- ACCESOS RÁPIDOS -->
+    <section class="border-t border-white/10">
+      <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div class="mb-10">
+          <span
+            class="text-sm font-bold uppercase tracking-widest text-orange-500"
+          >
+            Explora
+          </span>
+          <h2 class="mt-2 text-3xl font-black sm:text-4xl">
+            Explora DragonVerse
+          </h2>
+        </div>
+        <div class="grid gap-6 md:grid-cols-2">
+          <!-- PERSONAJES -->
+          <a
+            href="/characters"
+            class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition duration-300 hover:-translate-y-1 hover:border-orange-500/40 hover:bg-white/[0.05]"
+          >
+            <div
+              class="absolute -right-10 -top-10 text-9xl opacity-5 transition duration-300 group-hover:scale-110"
+            >
+              👤
+            </div>
+            <div class="relative">
+              <div
+                class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 text-2xl"
+              >
+                👤
+              </div>
+              <h3 class="text-2xl font-black">Personajes</h3>
+              <p class="mt-3 max-w-md leading-7 text-zinc-400">
+                Consulta información sobre personajes, razas, Ki, afiliaciones y
+                transformaciones.
+              </p>
+              <span
+                class="mt-6 text-sm font-bold text-orange-400 flex items-center gap-1"
+              >
+                Explorar personajes <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"
+                    ><path stroke="none" d="M0 0h24v24H0z" fill="none"
+                    ></path><path d="M5 12l14 0"></path><path d="M15 16l4 -4"
+                    ></path><path d="M15 8l4 4"></path></svg
+                  >
+                </span>
+              </span>
+            </div>
+          </a>
+          <!-- PLANETAS -->
+          <a
+            href="/planets"
+            class="group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition duration-300 hover:-translate-y-1 hover:border-orange-500/40 hover:bg-white/[0.05]"
+          >
+            <div
+              class="absolute -right-10 -top-10 text-9xl opacity-5 transition duration-300 group-hover:scale-110"
+            >
+              🌎
+            </div>
+            <div class="relative">
+              <div
+                class="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-orange-500/10 text-2xl"
+              >
+                🌎
+              </div>
+              <h3 class="text-2xl font-black">Planetas</h3>
+              <p class="mt-3 max-w-md leading-7 text-zinc-400">
+                Descubre los planetas, su estado y los personajes asociados a
+                cada uno.
+              </p>
+              <span
+                class="mt-6 text-sm font-bold text-orange-400 flex items-center gap-1"
+              >
+                Explorar planetas <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="icon icon-tabler icons-tabler-outline icon-tabler-arrow-narrow-right"
+                    ><path stroke="none" d="M0 0h24v24H0z" fill="none"
+                    ></path><path d="M5 12l14 0"></path><path d="M15 16l4 -4"
+                    ></path><path d="M15 8l4 4"></path></svg
+                  >
+                </span>
+              </span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>
