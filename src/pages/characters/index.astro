@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import CharacterCard from "../../components/CharacterCard.astro";
 import SearchBar from "../../components/SearchBar.astro";
 import { getCharacters } from "../../services/dragonball";
+export const prerender = false;
 
 interface Character {
   id: number;

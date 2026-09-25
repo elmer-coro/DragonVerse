@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar.astro";
 import PlanetCard from "../../components/PlanetCard.astro";
 import { getPlanets } from "../../services/dragonball";
 import SearchBar from "../../components/SearchBar.astro";
+export const prerender = false;
 
 interface Planet {
   id: number;
