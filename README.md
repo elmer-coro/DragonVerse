@@ -1,4 +1,4 @@
-# 🐉 DragonVers
+# 🐉 DragonVerse
 
 > Aplicación web para explorar personajes y planetas del universo **Dragon Ball**, desarrollada con Astro, Tailwind CSS y JavaScript utilizando una API externa.
 
